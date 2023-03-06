@@ -21,7 +21,7 @@ let counterFalse = document.getElementById("lost");
             }
         }
     }
-})()
+})();
 
 function restart() {
     counterFalse.textContent = 0;
