@@ -1,5 +1,5 @@
 let counterRight = document.getElementById("dead");
-let counterFalse = document.getElementById("lost");   
+let counterFalse = document.getElementById("lost");
 
 (function click() {
     for(let i = 1; i < 10; i++) {
@@ -14,13 +14,16 @@ let counterFalse = document.getElementById("lost");
         
             if(counterFalse.textContent == 5) {
                 alert("Вы проиграли, попробуйте снова!");
-                counterFalse.textContent = 0;
-                counterRight.textContent = 0;
+                restart();
             } else if (counterRight.textContent == 10) {
                 alert("Вы победили, поздравляю!");
-                counterFalse.textContent = 0;
-                counterRight.textContent = 0;
+                restart();
             }
         }
     }
 })()
+
+function restart() {
+    counterFalse.textContent = 0;
+    counterRight.textContent = 0;
+}
