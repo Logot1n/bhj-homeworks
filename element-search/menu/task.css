@@ -37,7 +37,7 @@ body {
   margin-bottom: 10px;
 }
 
-.menu_active {
+.menu_sub_active {
   display: block;
   left: -10px;
   top: 100%;
