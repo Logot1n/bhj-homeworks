@@ -12,7 +12,7 @@
 }
 
 .tooltip {
-  position: fixed;
+  position: relative;
   display: none;
   background: black;
   padding: 5px;
@@ -22,4 +22,5 @@
 
 .tooltip_active {
   display: block;
+  position: absolute;
 }
