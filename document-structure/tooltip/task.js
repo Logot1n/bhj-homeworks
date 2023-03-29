@@ -1,35 +1,41 @@
 const tooltipsLinks = [...document.querySelectorAll('.has-tooltip')];
+const maxActiveTooltipCount = 1;
 
 tooltipsLinks.forEach(tooltipLink => {
-    tooltipLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        
-        // Запрет на открытие 2 подсказок одновременно
-        const tooltipActive = document.querySelector('.tooltip');
-        if(tooltipActive) {
-            tooltipActive.remove();
-        }
+  tooltipLink.addEventListener('click', (event) => {
+    event.preventDefault();
 
-        // Добавление подсказки
-        const tooltip = document.createElement('div');
-        tooltip.classList.add('tooltip');
-        tooltip.textContent = tooltipLink.getAttribute('title');
-        tooltip.classList.add('tooltip_active');
+    // Добавление контейнера для подсказки
+    const tooltipContainer = document.createElement('div');
+    tooltipContainer.classList.add('tooltip_container');
 
-        document.addEventListener('click', (event) => {
-            if (!event.target.classList.contains('has-tooltip')) {
-              tooltip.classList.remove('tooltip_active');
-            }
-        })
+    // Добавление подсказки
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = tooltipLink.getAttribute('title');
+    tooltip.classList.add('tooltip_active');
 
-        // Установка позиционирования элемента с подсказкой
-        const coordinates = tooltipLink.getBoundingClientRect();
-        const coordinatesTop = coordinates.top + window.pageYOffset;
-        const coordinatesLeft = coordinates.left + window.pageXOffset;
-
-        tooltip.style.top = coordinatesTop + coordinates.height + 'px';
-        tooltip.style.left = coordinatesLeft + 'px';
+    // Закрытие подсказки при повторном клике на ссылку
+    const tooltipLinkActive = tooltipLink.querySelector('.tooltip_active');
+    if(tooltipLinkActive) {
+        tooltipLinkActive.remove();
+        return;
+    }
     
-        document.body.appendChild(tooltip);
-    });
+    // Запрет на открытие более 1-ой активной подсказки
+    const openedTooltips = document.querySelectorAll('.tooltip');
+        if (openedTooltips.length >= maxActiveTooltipCount) {
+        openedTooltips[0].remove();
+    }
+
+    // Установка позиционирования элемента с подсказкой
+    const coordinates = tooltipLink.getBoundingClientRect();
+    const coordinatesTop = coordinates.top + window.pageYOffset;
+    const coordinatesLeft = coordinates.left + window.pageXOffset;
+
+    tooltip.style.top = coordinatesTop + coordinates.height + 'px';
+    tooltip.style.left = coordinatesLeft + 'px';
+
+    tooltipLink.appendChild(tooltip);
+  });
 });
