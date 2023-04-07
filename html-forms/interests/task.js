@@ -19,8 +19,7 @@ interestContainer.addEventListener("change", (event) => {
   allChecks.reverse().forEach((check) => {
     const checksInUl = check.closest(".interest").querySelector("ul");
     if (!checksInUl) return;
-    const totalChecksInUl =
-      checksInUl.querySelectorAll(".interest__check").length;
+    const totalChecksInUl = checksInUl.querySelectorAll(".interest__check").length;
     const activeChecksInUl = checksInUl.querySelectorAll(":checked").length;
     if (totalChecksInUl === activeChecksInUl) {
       check.checked = true;
