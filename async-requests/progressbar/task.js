@@ -7,13 +7,20 @@ form.addEventListener('submit', (e) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/upload');
 
-    xhr.addEventListener('progress', function(e) {
-        if(e.lengthComputable) {
-            const percentComplete = (e.loaded / e.total) * 100;
+    xhr.upload.onprogress = function(event) {
+        if(event.lengthComputable) {
+            const percentComplete = (event.loaded / event.total) * 100;
             progress.value = percentComplete;
         }
-    })
+    };
 
-    xhr.send();
+    xhr.onloadend = function() {
+        if (xhr.status === 200) {
+          console.log("Успех");
+        } else {
+          console.log("Ошибка " + this.status);
+        }
+    };
+
+    xhr.send(new FormData(form));
 })
-
