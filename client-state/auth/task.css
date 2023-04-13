@@ -45,3 +45,13 @@
   display: block;
   text-align: center;
 }
+
+.logout__btn {
+  display: none;
+}
+
+.logout__btn_active {
+  display: block;
+  text-align: center;
+  margin: 20px 0px 20px 150px; 
+}
