@@ -2,7 +2,7 @@ const storedText = localStorage.getItem('text');
 const textEditor = document.getElementById('editor');
 
 // Загрузка текста из localStorage
-if(storedText) {
+if(storedText !== null) {
     textEditor.value = storedText;
 }
 
